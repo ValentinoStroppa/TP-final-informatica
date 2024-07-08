@@ -115,15 +115,24 @@ def actualizar_evento(base_url, id_evento, nombre_evento, hora_evento, duracion_
     else:
         print(f"No se pudo actualizar el evento")
 
+def eliminar_evento(base_url, id_evento):
+    url = f"{base_url}/eventos/{id_evento}"
+    
+    response = requests.delete(url)
+    if response.status_code == 200:
+        print("Evento eliminado exitosamente")
+    else:
+        print(f"No se pudo eliminar el evento")
+
 def main():
     base_url = "http://127.0.0.1:5000"
     while True:
         print("Opciones")
         print("1: Ver todos los eventos")
-        print("2: Ver evento por ID") 
+        print("2: Ver evento por ID")
         print("3: Agregar un evento nuevo")
-        print("4: Actualizar un evento existente")  # Puedes implementar esta opción si deseas
-        print("5: Eliminar un evento existente")  # Puedes implementar esta opción si deseas
+        print("4: Actualizar un evento existente")
+        print("5: Eliminar un evento existente")
         print("6: Salir")
 
         option = int(input("Seleccione una opción: "))
@@ -181,6 +190,11 @@ def main():
             idioma_evento = input("Nuevo idioma del evento: ")
 
             actualizar_evento(base_url, id_evento, nombre_evento, hora_evento, duracion_evento, ubicacion_evento, descripcion_evento, tipo_evento, idioma_evento)
+
+        elif option == 5:
+            print("Eliminar evento")
+            id_evento = input("ID del evento a eliminar: ")
+            eliminar_evento(base_url, id_evento)
 
         elif option == 6:
             break
