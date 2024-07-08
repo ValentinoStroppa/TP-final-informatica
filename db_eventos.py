@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 def crear_tabla():
     conn = sqlite3.connect('eventos.db')
@@ -46,3 +47,7 @@ if __name__ == "__main__":
     add_evento('004', 'Webinar de Finanzas Personales', '17:00', '1.5 horas', 'Colombia', 'Sesion en linea para aprender sobre gestion de finanzas personales', 'Virtual', 'Espaniol')
     add_evento('005', 'Taller de Desarrollo Web', '08:00', '5 horas', 'Chile', 'Curso practico sobre la creacion de sitios web utilizando HTML, CSS y JavaScript', 'Presencial', 'Espaniol')
     add_evento('006', 'Taller de Inteligencia Artificial', '12:00', '4 horas', 'Estados Unidos', 'Taller de desarrollo de soluciones basadas en inteligencia artificial', 'Presencial', 'Ingles')
+    add_evento('007', 'Reunion de equipo', '11:00', '1 horas', 'Estados Unidos', 'Reunion para definir objetivos', 'Presencial', 'Ingles')
+    add_evento('008', 'Taller de programacion', '13:00', '2 horas', 'Brasil', 'Taller de programacion avanzada', 'Virtual', 'Portugues')
+    add_evento('009', 'Reunion de sedes', '9:00', '1.5 horas', 'Argentina', 'Reunion para establecer objetivos de avance general', 'Virtual', 'Portugues')
+
