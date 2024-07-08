@@ -124,6 +124,27 @@ def eliminar_evento(base_url, id_evento):
     else:
         print(f"No se pudo eliminar el evento")
 
+def obtener_horas_zonas_horarias(zona_horaria_origen, zona_horaria_destino):
+    url_origen = f"http://worldtimeapi.org/api/timezone/{zona_horaria_origen}"
+    response_origen = requests.get(url_origen)
+    if response_origen.status_code == 200:
+        datos_origen = response_origen.json()
+        hora_origen = datos_origen["datetime"]
+        
+        url_destino = f"http://worldtimeapi.org/api/timezone/{zona_horaria_destino}"
+        response_destino = requests.get(url_destino)
+        if response_destino.status_code == 200:
+            datos_destino = response_destino.json()
+            hora_destino = datos_destino["datetime"]
+            
+            return hora_origen, hora_destino
+        else:
+            print("No se pudo obtener la información de la zona horaria de destino.")
+            return None, None
+    else:
+        print("No se pudo obtener la información de la zona horaria de origen.")
+        return None, None
+
 def main():
     base_url = "http://127.0.0.1:5000"
     while True:
@@ -133,7 +154,8 @@ def main():
         print("3: Agregar un evento nuevo")
         print("4: Actualizar un evento existente")
         print("5: Eliminar un evento existente")
-        print("6: Salir")
+        print("6: Convertir hora de un evento")
+        print("7: Salir")
 
         option = int(input("Seleccione una opción: "))
 
@@ -197,6 +219,17 @@ def main():
             eliminar_evento(base_url, id_evento)
 
         elif option == 6:
+            print("Obtener horas de dos zonas horarias")
+            zona_horaria_origen = input("Ingrese la zona horaria de origen (ejemplo: America/Argentina/Salta): ")
+            zona_horaria_destino = input("Ingrese la zona horaria de destino (ejemplo: Europe/London): ")
+            hora_origen, hora_destino = obtener_horas_zonas_horarias(zona_horaria_origen, zona_horaria_destino)
+            if hora_origen and hora_destino:
+                print(f"Hora en {zona_horaria_origen}: {hora_origen}")
+                print(f"Hora en {zona_horaria_destino}: {hora_destino}")
+            else:
+                print("No se pudo obtener la hora de una o ambas zonas horarias.")
+
+        elif option == 7:
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
